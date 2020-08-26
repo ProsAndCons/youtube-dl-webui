@@ -105,6 +105,12 @@ class Worker(Process):
         self.ydl_opts['progress_hooks'] = [self.ydl_hook.dispatcher]
         self.ydl_opts['noplaylist'] = "false"
         self.ydl_opts['progress_with_newline'] = True
+        self.ydl_opts['outtmpl'] = "%(uploader)s/%(title)s.%(ext)s"
+        self.ydl_opts['ffmpeg_location'] = "/usr/bin/ffmpeg"
+        self.ydl_opts['writethumbnail'] = True
+        self.ydl_opts['postprocessors'] = [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3'}, {'key': 'EmbedThumbnail'}, {'key': 'FFmpegMetadata'}]
+        self.ydl_opts['restrictfilenames'] = True
+        self.ydl_opts['prefer_ffmpeg'] = True
 
     def run(self):
         self.intercept_ydl_opts()
